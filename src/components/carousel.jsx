@@ -19,7 +19,7 @@ export default function Carousel({ products }) {
   const price = currentProduct.default_price;
   
   return (
-    <Card className="relative overflow-hidden rounded-lg shadow-md border-gray-300">
+    <Card className="relative overflow-hidden rounded-lg shadow-md shadow-gray-500 border-gray-500">
       {currentProduct.images && currentProduct.images[0] && (
         <div className="relative h-80 w-full">
           <Image
