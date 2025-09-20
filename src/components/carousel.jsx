@@ -31,15 +31,17 @@ export default function Carousel({ products }) {
           />
         </div>
       )}
-      <CardContent className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/25">
-          <CardTitle className="text-3xl font-bold mb-2">
-            {currentProduct.name}
-          </CardTitle>
-          {price && price.unit_amount && (
-            <p className="text-xl">
-              ${(price.unit_amount/100).toFixed(2)}
-            </p>
-          )}
+      <CardContent className="absolute inset-0 flex flex-col items-center justify-center text-white">
+          <div className="bg-black/50 text-center p-4 rounded-xl">
+            <CardTitle className="text-3xl font-bold mb-2">
+              {currentProduct.name}
+            </CardTitle>
+            {price && price.unit_amount && (
+              <p className="text-xl">
+                ${(price.unit_amount/100).toFixed(2)}
+              </p>
+            )}
+          </div>
       </CardContent>
     </Card>
   );
