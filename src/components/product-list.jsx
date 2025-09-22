@@ -20,6 +20,7 @@ export default function ProductsList({ products }) {
       <div className="mb-6 flex justify-center">
         <input
         type="text"
+        name="searchInput"
         placeholder="Search products"
         className="w-full max-w-md rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={searchTerm}
