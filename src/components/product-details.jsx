@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useCartStore } from "../../store/cart-store";
 
 export default function ProductDetails({ product }) {
-  const { items, addItem } = useCartStore();
+  const { items, addItem, removeItem } = useCartStore();
   const price = product.default_price;
   const cartItem = items.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
@@ -48,7 +48,12 @@ export default function ProductDetails({ product }) {
           </p>
         )}
         <div className="flex items-center space-x-4">
-          <Button className="bg-neutral-200" variant="outline">-</Button>
+          <Button
+          className="bg-neutral-200" variant="outline"
+          onClick={() => removeItem(product.id)}
+          >
+            -
+          </Button>
           <span className="text-lg font-semibold">{quantity}</span>
           <Button onClick={onAddItem}>+</Button>
         </div>
