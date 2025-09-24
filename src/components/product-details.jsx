@@ -2,9 +2,23 @@
 
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useCartStore } from "../../store/cart-store";
 
 export default function ProductDetails({ product }) {
-const price = product.default_price;
+  const { items, addItem } = useCartStore();
+  const price = product.default_price;
+  const cartItem = items.find((item) => item.id === product.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+
+  const onAddItem = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: price.unit_amount,
+      imageUrl: product.images ? product.images[0] : null,
+      quantity: 1,
+    });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 items-center">
@@ -35,8 +49,8 @@ const price = product.default_price;
         )}
         <div className="flex items-center space-x-4">
           <Button className="bg-neutral-200" variant="outline">-</Button>
-          <span className="text-lg font-semibold">{0}</span>
-          <Button>+</Button>
+          <span className="text-lg font-semibold">{quantity}</span>
+          <Button onClick={onAddItem}>+</Button>
         </div>
       </div>
     </div>
