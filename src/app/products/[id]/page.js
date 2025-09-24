@@ -7,13 +7,14 @@ export default async function ProductPage(props) {
     expand: ["default_price"],
   });
 
-  const serializedProduct = {
-    id: product.id,
-    name: product.name,
-    description: product.description,
-    images: product.images || null,
-    default_price: product.default_price
-  }
+  const serializedProduct = JSON.parse(JSON.stringify(product));
+  // const serializedProduct = {
+  //   id: product.id,
+  //   name: product.name,
+  //   description: product.description,
+  //   images: product.images || null,
+  //   default_price: product.default_price
+  // }
   return (
     <ProductDetails product={serializedProduct} />
   );
