@@ -1,9 +1,15 @@
+'use client';
+
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useCartStore } from "../../store/cart-store";
 
 export default function ProductCard({ product }) {
+  const  { items } = useCartStore();
+  const cartItem = items.find((item) => item.id === product.id);
+  const itemInCart = cartItem && cartItem.quantity > 0 ? true : false;
   const price = product.default_price;
   
   return (
@@ -34,6 +40,7 @@ export default function ProductCard({ product }) {
               ${(price.unit_amount / 100).toFixed(2)}
             </p>
           )}
+          {itemInCart && <p className="font-bold">*In cart</p>}
           <Button className="mt-4">View item</Button>
         </CardContent>
       </Card>
