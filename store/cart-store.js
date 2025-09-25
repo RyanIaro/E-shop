@@ -38,6 +38,13 @@ export const useCartStore = create()(
         : item).filter((item) => item.quantity > 0),
       };
     }),
+    removeAllItem: (id) => set((state) => {
+      return {
+        items: state.items.map((item) => item.id === id
+        ? {...item, quantity: 0}
+        : item)
+      };
+    }),
     clearCart: () => set((state) => {
       return { items: [] };
     }),

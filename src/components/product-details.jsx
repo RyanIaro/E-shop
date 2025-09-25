@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useCartStore } from "../../store/cart-store";
 
 export default function ProductDetails({ product }) {
-  const { items, addItem, removeItem } = useCartStore();
+  const { items, addItem, removeItem, removeAllItem } = useCartStore();
   const price = product.default_price;
   const cartItem = items.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
@@ -47,6 +47,7 @@ export default function ProductDetails({ product }) {
             ${(price.unit_amount / 100).toFixed(2)}
           </p>
         )}
+        <p className="my-4 text-gray-700">Add to/Remove from cart:</p>
         <div className="flex items-center space-x-4">
           <Button
           className="bg-neutral-200" variant="outline"
@@ -56,6 +57,15 @@ export default function ProductDetails({ product }) {
           </Button>
           <span className="text-lg font-semibold">{quantity}</span>
           <Button onClick={onAddItem}>+</Button>
+          {quantity > 0 && (
+            <Button
+            variant="outline"
+            className="bg-red-100 hover:bg-red-200"
+            onClick={() => removeAllItem(product.id)}
+            >
+              Remove this item from the cart
+            </Button>
+          )}
         </div>
       </div>
     </div>
