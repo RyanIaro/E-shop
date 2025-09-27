@@ -42,7 +42,7 @@ export const useCartStore = create()(
       return {
         items: state.items.map((item) => item.id === id
         ? {...item, quantity: 0}
-        : item)
+        : item).filter((item) => item.quantity > 0),
       };
     }),
     clearCart: () => set((state) => {
