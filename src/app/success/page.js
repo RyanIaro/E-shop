@@ -13,11 +13,11 @@ export default function SuccessPage() {
   }, [clearCart])
 
   return (
-    <div>
-      <h1>Payment successful!</h1>
-      <p>Thank you for your purchase. Your order is being processed.</p>
+    <div className="container mx-auto px-4 py-8 text-center">
+      <h1 className="text-3xl font-bold mb-4">Payment successful!</h1>
+      <p className="mb-4">Thank you for your purchase. Your order is being processed.</p>
 
-      <Button asChild>
+      <Button asChild variant="link" className="underline hover:text-blue-400">
         <Link href="/products">Continue shopping</Link>
       </Button>
     </div>
