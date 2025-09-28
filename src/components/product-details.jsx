@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useCartStore } from "../../store/cart-store";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function ProductDetails({ product }) {
   const { items, addItem, removeItem, removeAllItem } = useCartStore();
@@ -47,6 +48,7 @@ export default function ProductDetails({ product }) {
             ${(price.unit_amount / 100).toFixed(2)}
           </p>
         )}
+        {cartItem && cartItem.quantity > 0 && <p className="font-bold">*In cart</p>}
         <p className="my-4 text-gray-700">Add to/Remove from cart:</p>
         <div className="flex items-center space-x-4">
           <Button
@@ -63,7 +65,7 @@ export default function ProductDetails({ product }) {
             className="bg-red-100 hover:bg-red-200"
             onClick={() => removeAllItem(product.id)}
             >
-              Remove this item from the cart
+              <XMarkIcon/> Remove this item from the cart
             </Button>
           )}
         </div>
