@@ -19,8 +19,8 @@ export const checkoutAction = async (formData) => {
     payment_method_types: ["card"],
     line_items,
     mode: "payment",
-    // success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,   in case you want a separate success page
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
+    // success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`,
   });
 
