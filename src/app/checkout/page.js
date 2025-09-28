@@ -3,9 +3,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCartStore } from "../../../store/cart-store";
 import { Button } from "@/components/ui/button";
+import { checkoutAction } from "./checkout-action";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function CheckoutPage() {
-  const { items, addItem, removeItem, clearCart } = useCartStore();
+  const { items, addItem, removeItem, clearCart, removeAllItem } = useCartStore();
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -45,10 +47,17 @@ export default function CheckoutPage() {
                   </Button>
                   <span className="text-lg font-semibold">{item.quantity}</span>
                   <Button
-                  variant="outline" size="sm"
+                  size="sm"
                   onClick={() => addItem({...item, quantity: 1})}
                   >
                     +
+                  </Button>
+                  <Button
+                  variant="outline" size="sm"
+                  className="bg-red-400 hover:bg-red-500"
+                  onClick={() => removeAllItem(item.id)}
+                  >
+                    <XMarkIcon/>
                   </Button>
                 </div>
               </li>
@@ -59,7 +68,8 @@ export default function CheckoutPage() {
           </div>
         </CardContent>
       </Card>
-      <form className="flex justify-center max-w-md mx-auto gap-8">
+      <form action={checkoutAction} className="flex justify-center max-w-md mx-auto gap-8">
+        <input type="hidden" name="items" value={JSON.stringify(items)} />
         <Button
         type="submit" 
         variant="outline"
