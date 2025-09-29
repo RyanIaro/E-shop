@@ -5,6 +5,7 @@ import { useCartStore } from "../../../store/cart-store";
 import { Button } from "@/components/ui/button";
 import { checkoutAction } from "./checkout-action";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function CheckoutPage() {
   const { items, addItem, removeItem, clearCart, removeAllItem } = useCartStore();
@@ -17,6 +18,9 @@ export default function CheckoutPage() {
     return (
       <div className="container mx-auto text-center">
         <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
+        <Button asChild>
+          <Link href="/products">Browse products</Link>
+        </Button>
       </div>
     );
   }
@@ -54,7 +58,7 @@ export default function CheckoutPage() {
                   </Button>
                   <Button
                   variant="outline" size="sm"
-                  className="bg-red-400 hover:bg-red-500"
+                  className="bg-red-100 hover:bg-red-200"
                   onClick={() => removeAllItem(item.id)}
                   >
                     <XMarkIcon/>
@@ -68,19 +72,19 @@ export default function CheckoutPage() {
           </div>
         </CardContent>
       </Card>
-      <form action={checkoutAction} className="flex justify-center max-w-md mx-auto gap-8">
+      <form action={checkoutAction} className="flex flex-col items-center max-w-md mx-auto gap-4">
         <input type="hidden" name="items" value={JSON.stringify(items)} />
         <Button
         type="submit" 
         variant="outline"
-        className="bg-blue-400 hover:bg-blue-500 w-1/3"
+        className="bg-green-400 hover:bg-green-500 "
         >
           Proceed to payement
         </Button>
         <Button
         onClick={()=> clearCart()}
         variant="outline"
-        className="bg-red-400 hover:bg-red-500 text-black w-1/3"
+        className="bg-red-100 hover:bg-red-200 text-black w-1/3"
         >
           Clear cart
         </Button>
