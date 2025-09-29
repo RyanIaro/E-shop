@@ -15,6 +15,7 @@ export default function Navbar() {
   const pages = ["products","checkout"]
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
   const isActive = (path) => pathname === path;
+  const isDetailsPage = (path) => pathname.startsWith(path);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,7 +47,7 @@ export default function Navbar() {
               <Link
               key={index}
               href={href}
-              className={`hover:text-blue-600 p-4 ${isActive(`${href}`) ? "bg-neutral-100 border-b-2 border-b-blue-400" : ""}`}
+              className={`hover:text-blue-600 p-4 ${isActive(`${href}`) || isDetailsPage(`${href}/`) ? "bg-neutral-100 border-b-2 border-b-blue-400" : ""}`}
               >
                 {page.charAt(0).toUpperCase() + page.slice(1)}
               </Link>
