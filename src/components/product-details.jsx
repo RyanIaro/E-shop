@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useCartStore } from "../../store/cart-store";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function ProductDetails({ product }) {
+export default function ProductDetails({ product, previousProductId, nextProductId }) {
   const { items, addItem, removeItem, removeAllItem } = useCartStore();
   const price = product.default_price;
   const cartItem = items.find((item) => item.id === product.id);
@@ -23,6 +25,10 @@ export default function ProductDetails({ product }) {
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 items-center">
+      <Link href="/products" className="flex font-semibold md:mt-20 mt-16 top-4 left-4 absolute">
+        <ArrowLeftIcon className="h-6 w-6 mr-2"/>
+        Back
+      </Link>
       {product.images && product.images[0] && (
         <div className="relative h-96 w-full md:w-1/2 rounded-lg overflow-visible">
           <Image
@@ -35,8 +41,14 @@ export default function ProductDetails({ product }) {
         </div>
       )}
       <div className="md:w-1/2">
-        <h1 className="text-3xl font-bold mb-4">
+        <h1 className="flex items-center gap-8 text-3xl font-bold mb-4">
+          <Link href={`/products/${previousProductId}`}>
+            <ArrowLeft className="h-6 w-6"/>
+          </Link>
           {product.name}
+          <Link href={`/products/${nextProductId}`}>
+            <ArrowRight className="h-6 w-6"/>
+          </Link>
         </h1>
         {product.description && (
           <p className="text-gray-700 mb-4">
